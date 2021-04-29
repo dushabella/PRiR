@@ -1,0 +1,75 @@
+*** PRiR Lab 01 ***
+** Hubert Biedka **
+** Izabela Dusza **
+Ćwiczenie wprowadzające - Zapoznanie się z procesami w systemie Linux/UNIX 
+
+0) Wyświetlenie listy procesów za pomocą systemowego polecenia ps i ps -l, oraz pstree -c, oraz pstree -c
+
+duszai@prir:~$ ps
+  PID TTY          TIME CMD
+  613 pts/0    00:00:00 bash
+  861 pts/0    00:00:00 ps
+duszai@prir:~$ ps -l
+F S   UID   PID  PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+0 S 14987   613   612  0  80   0 -  8254 wait   pts/0    00:00:00 bash
+0 R 14987   864   613  0  80   0 -  7212 -      pts/0    00:00:00 ps
+duszai@prir:~$ pstree -c
+systemd─┬─VGAuthService
+        ├─accounts-daemon─┬─{accounts-daemon}
+        │                 └─{accounts-daemon}
+        ├─agetty
+        ├─atd
+        ├─cron
+        ├─dbus-daemon
+        ├─irqbalance───{irqbalance}
+        ├─mpiexec─┬─python
+        │         ├─python
+        │         ├─python
+        │         ├─python
+        │         ├─python
+        │         ├─{mpiexec}
+        │         ├─{mpiexec}
+        │         ├─{mpiexec}
+        │         └─{mpiexec}
+        ├─networkd-dispat───{networkd-dispat}
+        ├─polkitd─┬─{polkitd}
+        │         └─{polkitd}
+        ├─rpc.statd
+        ├─rpcbind
+        ├─rsyslogd─┬─{rsyslogd}
+        │          ├─{rsyslogd}
+        │          └─{rsyslogd}
+        ├─sshd─┬─sshd───sshd───bash───pstree
+        │      ├─sshd───sshd
+        │      └─sshd───sshd
+        ├─sssd─┬─sssd_be
+        │      ├─sssd_nss
+        │      └─sssd_pam
+        ├─systemd───(sd-pam)
+        ├─systemd───(sd-pam)
+        ├─systemd-journal
+        ├─systemd-logind
+        ├─systemd-resolve
+        ├─systemd-timesyn───{systemd-timesyn}
+        ├─systemd-udevd
+        ├─unattended-upgr───{unattended-upgr}
+        ├─vmtoolsd───{vmtoolsd}
+        └─wpa_supplicant
+duszai@prir:~$ pstree -c duszai
+sshd───bash───pstree
+
+systemd───(sd-pam)
+
+Komentarz: w ćwiczeniu wyświetlono istniejące procesy z poziomu konsoli. Użyto poleceń do wyświetlenia listy procesów ($ ps), listy procesów ze szczegółami ($ ps -l), a następnie drzewa procesów całego systemu ($ pstree -c) oraz drzewa procesów konkretnego użytkownika ($ pstree -c duszai). Widać, że wśród aktywnych procesów jest uruchomiony przeze mnie ps oraz bash (konsolowy interpreter poleceń). Drzewo procesów pokazuje z kolei zależności hierarchiczne pomiędzy procesami, czyli procesy potomne i macierzyste. 
+
+1) kompilacja:
+	$ gcc cw1.c -o cw1.out
+
+   uruchamianie
+	$ ./cw1.out 
+	
+2) kompilacja:
+	$ gcc cw2.c -o cw2.out
+
+   uruchamianie
+	$ ./cw2.out 
